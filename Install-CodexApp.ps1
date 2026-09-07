@@ -128,7 +128,17 @@ try {
         $downloadedPackage = Join-Path $env:TEMP "codex-$runId.msix"
         $package = $downloadedPackage
         Write-Step "Downloading the latest Codex package"
-        & curl.exe --fail --location --retry 3 --output $package $PackageUrl
+        & curl.exe `
+            --fail `
+            --location `
+            --retry 3 `
+            --retry-delay 2 `
+            --connect-timeout 20 `
+            --speed-limit 1024 `
+            --speed-time 30 `
+            --continue-at - `
+            --output $package `
+            $PackageUrl
         if ($LASTEXITCODE -ne 0) {
             throw "Download failed with curl exit code $LASTEXITCODE."
         }
