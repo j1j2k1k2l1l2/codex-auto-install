@@ -1,0 +1,6 @@
+# This repository also serves as the portable Codex installation directory.
+/*
+!/.gitignore
+!/README.md
+!/Install-CodexApp.ps1
+!/install.cmd
