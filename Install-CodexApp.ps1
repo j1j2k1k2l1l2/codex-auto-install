@@ -1,11 +1,15 @@
 [CmdletBinding()]
 param(
-    [string]$TargetDirectory = $PSScriptRoot,
+    [string]$TargetDirectory,
     [string]$PackagePath
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+
+if ([string]::IsNullOrWhiteSpace($TargetDirectory)) {
+    $TargetDirectory = $PSScriptRoot
+}
 
 $PackageUrl = "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-x64.msix"
 $ExpectedPackageName = "OpenAI.Codex"
